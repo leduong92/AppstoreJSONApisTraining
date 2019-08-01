@@ -15,10 +15,23 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        collectionView.backgroundColor = #colorLiteral(red: 0.9274409003, green: 0.9274409003, blue: 0.9274409003, alpha: 1)
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: todayCellId)
+        collectionView.register(TodayCell.self, forCellWithReuseIdentifier: todayCellId)
         
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showSingleAppFullScreen(indexPath: indexPath)
+    }
+    
+    fileprivate func showSingleAppFullScreen(indexPath: IndexPath) {
+        // #1
+        setupSingleAppFullscreenController(indexPath)
+    }
+    fileprivate func setupSingleAppFullscreenController(_ indexPath: IndexPath) {
+        let appFullscreenController = UIViewController()
+        appFullscreenController.view.backgroundColor = .red
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -27,7 +40,6 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: todayCellId, for: indexPath)
-        cell.backgroundColor = .red
         return cell
     }
     
