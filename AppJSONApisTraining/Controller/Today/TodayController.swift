@@ -12,8 +12,12 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
     
     let todayCellId = "todayCellId"
     
+    var items = [TodayItem]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fetchData()
         
         navigationController?.isNavigationBarHidden = true
         collectionView.backgroundColor = #colorLiteral(red: 0.9274409003, green: 0.9274409003, blue: 0.9274409003, alpha: 1)
@@ -21,6 +25,32 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
         collectionView.register(TodayCell.self, forCellWithReuseIdentifier: todayCellId)
         
     }
+    
+    fileprivate func fetchData() {
+        let dispathGroup = DispatchGroup()
+        
+        var topGrossingGroup: AppGroup?
+        var gamesGroup: AppGroup?
+        
+        dispathGroup.enter()
+        Service.shared.fetchTopFree { (appGroup, err) in
+            topGrossingGroup = appGroup
+            dispathGroup.leave()
+        }
+        dispathGroup.enter()
+        Service.shared.fetchGames { (appGroup, err) in
+            gamesGroup = appGroup
+            dispathGroup.leave()
+        }
+        dispathGroup.notify(queue: .main) {
+            print("finished fetching")
+            
+            self.items = [
+                TodayItem(category: <#T##String#>, title: <#T##String#>, image: <#T##UIImage#>, description: <#T##String#>, backgroundColor: <#T##UIColor#>)
+            ]
+        }
+    }
+    
     var appFullscreenController: AppFullscreenController!
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

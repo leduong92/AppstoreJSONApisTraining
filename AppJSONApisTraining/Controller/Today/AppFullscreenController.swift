@@ -11,10 +11,10 @@ import UIKit
 class AppFullscreenController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
-        
+        tableView.contentInsetAdjustmentBehavior = .never
     }
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -22,6 +22,12 @@ class AppFullscreenController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
+        cell.backgroundColor = .red
+        
+        let headercell = AppFullscreenHeaderCell()
+//        headercell.todayCell.
+        
+        
         return cell
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

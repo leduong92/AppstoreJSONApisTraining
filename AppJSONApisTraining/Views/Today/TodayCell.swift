@@ -10,6 +10,16 @@ import UIKit
 
 class TodayCell: UICollectionViewCell {
     
+    var todayItem: TodayItem! {
+        didSet {
+            categoryLabel.text = todayItem.category
+            titleLabel.text = todayItem.title
+            imageView.image = todayItem.image
+            descriptionLabel.text = todayItem.description
+            backgroundColor = todayItem.backgroundColor
+        }
+    }
+    
     let categoryLabel = UILabel(text: "LIFE HACK", font: .boldSystemFont(ofSize: 20))
     let titleLabel = UILabel(text: "Utilizing your  Time", font: .boldSystemFont(ofSize: 28))
     let imageView = UIImageView(image: #imageLiteral(resourceName: "garden"))
@@ -33,7 +43,7 @@ class TodayCell: UICollectionViewCell {
         addSubview(stackView)
         
         stackView.fillSuperview(padding: .init(top: 24, left: 24, bottom: 24, right: 24))
-
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
