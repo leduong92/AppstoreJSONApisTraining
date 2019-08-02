@@ -49,11 +49,13 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
     fileprivate func setupAppFullscreenStartingPosition(_ indexPath: IndexPath) {
         let fullscreenView = appFullscreenController.view!
         view.addSubview(fullscreenView)
+        addChild(appFullscreenController)
         setupStartingCellFrame(indexPath)
         guard let startingFrame = self.startingFrame else { return }
 //        fullscreenView.frame = startingFrame
         
         self.anchoredConstraints = fullscreenView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: startingFrame.origin.y, left: startingFrame.origin.x, bottom: 0, right: 0), size: .init(width: startingFrame.width, height: startingFrame.height))
+        self.view.layoutIfNeeded()
         
     }
     var startingFrame: CGRect?
@@ -72,7 +74,9 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
             self.anchoredConstraints?.width?.constant = self.view.frame.width
             self.anchoredConstraints?.height?.constant = self.view.frame.height
             
-            self.view.layoutIfNeeded()
+            self.view.layoutIfNeeded() //starts animation
+            
+            self.tabBarController?.tabBar.transform =  CGAffineTransform(translationX: 0, y: 100)
             
         }, completion: nil)
     }

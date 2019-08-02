@@ -12,7 +12,6 @@ class AppFullscreenController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .red
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
         
