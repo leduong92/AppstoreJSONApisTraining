@@ -31,8 +31,11 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
         // #1
         setupSingleAppFullscreenController(indexPath)
         
-        //# 2 setup fullscreen in its starting position
+        // #2 setup fullscreen in its starting position
         setupAppFullscreenStartingPosition(indexPath)
+        
+        // #3 Begin animate
+        beginAnimationAppFullscreen()
     }
     
     fileprivate func setupSingleAppFullscreenController(_ indexPath: IndexPath) {
@@ -40,30 +43,39 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
         let appFullscreenController = AppFullscreenController()
         
         appFullscreenController.view.layer.cornerRadius = 16
+        self.appFullscreenController = appFullscreenController
     }
     
     fileprivate func setupAppFullscreenStartingPosition(_ indexPath: IndexPath) {
         let fullscreenView = appFullscreenController.view!
         view.addSubview(fullscreenView)
-        
         setupStartingCellFrame(indexPath)
-        
         guard let startingFrame = self.startingFrame else { return }
+//        fullscreenView.frame = startingFrame
         
-        fullscreenView.frame = startingFrame
+        self.anchoredConstraints = fullscreenView.anchor(top: view.topAnchor, leading: view.leadingAnchor, bottom: nil, trailing: nil, padding: .init(top: startingFrame.origin.y, left: startingFrame.origin.x, bottom: 0, right: 0), size: .init(width: startingFrame.width, height: startingFrame.height))
+        
     }
     var startingFrame: CGRect?
+    var anchoredConstraints: AnchoredConstraints?
     
     fileprivate func setupStartingCellFrame(_ indexPath: IndexPath) {
-        
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        
         guard let startingFrame = cell.superview?.convert(cell.frame, to: nil) else { return }
-        
         self.startingFrame = startingFrame
-        
     }
-    
+    fileprivate func beginAnimationAppFullscreen() {
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+
+            self.anchoredConstraints?.top?.constant = 0
+            self.anchoredConstraints?.leading?.constant = 0
+            self.anchoredConstraints?.width?.constant = self.view.frame.width
+            self.anchoredConstraints?.height?.constant = self.view.frame.height
+            
+            self.view.layoutIfNeeded()
+            
+        }, completion: nil)
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
