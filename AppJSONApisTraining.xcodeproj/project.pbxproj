@@ -19,6 +19,7 @@
 		57C42C4422F2F2E5002DF3BB /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C42C4322F2F2E5002DF3BB /* Extension.swift */; };
 		57C42C4622F2F2FE002DF3BB /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C42C4522F2F2FE002DF3BB /* UIView+Layout.swift */; };
 		57C42C4822F2F545002DF3BB /* VerticalStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C42C4722F2F545002DF3BB /* VerticalStackView.swift */; };
+		57C42C4A22F2F9B4002DF3BB /* AppFullscreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C42C4922F2F9B4002DF3BB /* AppFullscreenController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		57C42C4322F2F2E5002DF3BB /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		57C42C4522F2F2FE002DF3BB /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		57C42C4722F2F545002DF3BB /* VerticalStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalStackView.swift; sourceTree = "<group>"; };
+		57C42C4922F2F9B4002DF3BB /* AppFullscreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFullscreenController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				57C42C3C22F2EE74002DF3BB /* TodayController.swift */,
+				57C42C4922F2F9B4002DF3BB /* AppFullscreenController.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57C42C4A22F2F9B4002DF3BB /* AppFullscreenController.swift in Sources */,
 				57C42C4622F2F2FE002DF3BB /* UIView+Layout.swift in Sources */,
 				57C42C4822F2F545002DF3BB /* VerticalStackView.swift in Sources */,
 				57C42C3F22F2F04D002DF3BB /* BaseListController.swift in Sources */,
