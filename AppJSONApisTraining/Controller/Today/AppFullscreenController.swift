@@ -39,6 +39,7 @@ class AppFullscreenController: UITableViewController {
     }
     
     @objc fileprivate func handleDismiss(button: UIButton) {
+        print("clicking close button")
         button.isHidden = true
         dismisHandler?()
     }

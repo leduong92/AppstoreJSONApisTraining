@@ -78,7 +78,9 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
         print("clicking into today cell:", indexPath)
         let appFullscreenController = AppFullscreenController()
         appFullscreenController.todayItem = items[indexPath.item]
-        
+        appFullscreenController.dismisHandler = {
+            self.handleAppFullscreenDismissal()
+        }
         appFullscreenController.view.layer.cornerRadius = 16
         self.appFullscreenController = appFullscreenController
     }
@@ -118,7 +120,39 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
             cell.layoutIfNeeded()
         }, completion: nil)
     }
-    
+    fileprivate func handleAppFullscreenDismissal() {
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            print("handle dismissal when clicking close button")
+            self.appFullscreenController.view.transform = .identity
+            self.appFullscreenController.tableView.contentOffset = .zero
+            
+            
+            guard let startingFrame = self.startingFrame else { return }
+            
+            self.anchoredConstraints?.top?.constant = startingFrame.origin.y
+            self.anchoredConstraints?.leading?.constant = startingFrame.origin.x
+            self.anchoredConstraints?.width?.constant = startingFrame.width
+            self.anchoredConstraints?.height?.constant = startingFrame.height
+            
+            self.view.layoutIfNeeded()
+            self.tabBarController?.tabBar.transform = .identity
+            
+            guard let cell = self.appFullscreenController.tableView.cellForRow(at: [0, 0]) as? AppFullscreenHeaderCell else { return }
+            cell.closeButton.alpha = 0
+            cell.todayCell.topConstaint.constant = 24
+            cell.layoutIfNeeded()
+            
+        }) { _ in
+            self.appFullscreenController.view.removeFromSuperview()
+            self.appFullscreenController.removeFromParent()
+        }
+        
+        
+        
+        
+        
+    }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return items.count
     }
