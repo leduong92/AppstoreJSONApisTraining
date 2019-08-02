@@ -77,6 +77,7 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
     fileprivate func setupSingleAppFullscreenController(_ indexPath: IndexPath) {
         print("clicking into today cell:", indexPath)
         let appFullscreenController = AppFullscreenController()
+        appFullscreenController.todayItem = items[indexPath.item]
         
         appFullscreenController.view.layer.cornerRadius = 16
         self.appFullscreenController = appFullscreenController
@@ -113,7 +114,8 @@ class TodayController: BaseListController, UICollectionViewDelegateFlowLayout {
             self.view.layoutIfNeeded() //starts animation
             
             self.tabBarController?.tabBar.transform =  CGAffineTransform(translationX: 0, y: 100)
-            
+            guard let cell = self.appFullscreenController.tableView.cellForRow(at: [0, 0]) as? AppFullscreenHeaderCell else { return }
+            cell.layoutIfNeeded()
         }, completion: nil)
     }
     

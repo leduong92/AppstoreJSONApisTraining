@@ -10,8 +10,11 @@ import UIKit
 
 class TodayCell: UICollectionViewCell {
     
-    var todayItem: TodayItem! {
+    var todayItem: TodayItem? {
         didSet {
+            
+            guard let todayItem = todayItem  else { return }
+            
             categoryLabel.text = todayItem.category
             titleLabel.text = todayItem.title
             imageView.image = todayItem.image

@@ -9,6 +9,9 @@
 import UIKit
 
 class AppFullscreenController: UITableViewController {
+    
+    var todayItem: TodayItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,10 +25,11 @@ class AppFullscreenController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
-        cell.backgroundColor = .red
+//        cell.backgroundColor = .red
         
         let headercell = AppFullscreenHeaderCell()
 //        headercell.todayCell.
+        headercell.todayCell.todayItem = todayItem
         
         
         return cell
